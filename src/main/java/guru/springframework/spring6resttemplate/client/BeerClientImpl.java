@@ -21,7 +21,7 @@ public class BeerClientImpl implements BeerClient {
     // Autowires bean from RestTemplateBuilderConfig
     private final RestTemplateBuilder restTemplateBuilder;
     static final String GET_BEER_PATH = "/api/v1/beer";
-    private static final String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
+    static final String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
 
     @Override
     public Page<BeerDTO> listBeers(
