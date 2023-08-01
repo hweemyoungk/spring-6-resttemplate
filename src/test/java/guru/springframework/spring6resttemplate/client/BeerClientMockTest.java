@@ -82,6 +82,7 @@ public class BeerClientMockTest {
         String payload = objectMapper.writeValueAsString(getPage());
 
         server.expect(method(HttpMethod.GET))
+                .andExpect(header("Authorization", "Basic dXNlcjE6c2VjcmV0"))
                 .andExpect(requestTo(URL + BeerClientImpl.GET_BEER_PATH))
                 .andRespond(withSuccess(payload, MediaType.APPLICATION_JSON));
 
@@ -97,6 +98,7 @@ public class BeerClientMockTest {
                 .queryParam("beerName", "ALE")
                 .build().toUri();
         server.expect(method(HttpMethod.GET))
+                .andExpect(header("Authorization", "Basic dXNlcjE6c2VjcmV0"))
                 .andExpect(requestTo(URL + uri))
                 .andRespond(withSuccess(payload, MediaType.APPLICATION_JSON));
         Page<BeerDTO> beerDTOS = beerClient.listBeers("ALE", null, null, null, null);
@@ -110,6 +112,7 @@ public class BeerClientMockTest {
                 .fromPath(BeerClientImpl.GET_BEER_BY_ID_PATH)
                 .build(dto.getId());
         server.expect(method(HttpMethod.POST))
+                .andExpect(header("Authorization", "Basic dXNlcjE6c2VjcmV0"))
                 .andExpect(requestTo(
                         URL + BeerClientImpl.GET_BEER_PATH
                 ))
@@ -124,6 +127,7 @@ public class BeerClientMockTest {
     @Test
     void testUpdateBeer() {
         server.expect(method(HttpMethod.PUT))
+                .andExpect(header("Authorization", "Basic dXNlcjE6c2VjcmV0"))
                 .andExpect(requestToUriTemplate(
                         URL + BeerClientImpl.GET_BEER_BY_ID_PATH,
                         dto.getId()))
@@ -137,6 +141,7 @@ public class BeerClientMockTest {
     @Test
     void testDeleteBeer() {
         server.expect(method(HttpMethod.DELETE))
+                .andExpect(header("Authorization", "Basic dXNlcjE6c2VjcmV0"))
                 .andExpect(requestToUriTemplate(
                         URL + BeerClientImpl.GET_BEER_BY_ID_PATH,
                         dto.getId()))
@@ -148,6 +153,7 @@ public class BeerClientMockTest {
     @Test
     void testDeleteBeerNotFound() {
         server.expect(method(HttpMethod.DELETE))
+                .andExpect(header("Authorization", "Basic dXNlcjE6c2VjcmV0"))
                 .andExpect(requestToUriTemplate(
                         URL + BeerClientImpl.GET_BEER_BY_ID_PATH,
                         dto.getId()))
@@ -161,6 +167,7 @@ public class BeerClientMockTest {
 
     private void serverMockGet() {
         server.expect(method(HttpMethod.GET))
+                .andExpect(header("Authorization", "Basic dXNlcjE6c2VjcmV0"))
                 .andExpect(requestToUriTemplate(URL + BeerClientImpl.GET_BEER_BY_ID_PATH, dto.getId()))
                 .andRespond(withSuccess(dtoPayload, MediaType.APPLICATION_JSON));
     }
